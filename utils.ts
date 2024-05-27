@@ -196,7 +196,6 @@ export const loadSigned = (ds: Slice) => {
 export const testLog = (message: Message, from: Address, topic: number | bigint, matcher?:(body: Cell) => boolean) => {
     // Meh
     if(message.info.type !== "external-out") {
-        console.log("Wrong from");
         return false;
     }
     if(!message.info.src.equals(from))
