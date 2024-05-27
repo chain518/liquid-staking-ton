@@ -316,7 +316,6 @@ export const calcMaxPunishment = (stake: bigint, config: Cell | ConfigDict) => {
   fine_part = fine_part * rec.medium_proportional_mult; fine_part >>= 8;
 	*/
 	fine = fine + (stake * fine_part / (1n << 32n));
-	// console.log(stake);
  	if(fine > stake) 
 		return stake;
 

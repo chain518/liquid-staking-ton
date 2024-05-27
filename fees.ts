@@ -12,45 +12,6 @@ export type MsgPrices = ReturnType<typeof configParseMsgPrices>
 // Source: https://github.com/ton-foundation/ton/blob/ae5c0720143e231c32c3d2034cfe4e533a16d969/crypto/block/transaction.cpp#L425
 //
 
-/*
-export function computeStorageFees(data: {
-    now: number
-    lastPaid: number
-    storagePrices: StoragePrices[]
-    storageStat: { cells: number, bits: number, publicCells: number }
-    special: boolean
-    masterchain: boolean
-}) {
-    const {
-        lastPaid,
-        now,
-        storagePrices,
-        storageStat,
-        special,
-        masterchain
-    } = data;
-    if (now <= lastPaid || storagePrices.length === 0 || now < storagePrices[0].utime_since.toNumber() || special) {
-        return new BN(0);
-    }
-    let upto = Math.max(lastPaid, storagePrices[0].utime_since.toNumber());
-    let total = new BN(0);
-    for (let i = 0; i < storagePrices.length && upto < now; i++) {
-        let valid_until = (i < storagePrices.length - 1 ? Math.min(now, storagePrices[i + 1].utime_since.toNumber()) : now);
-        let payment = new BN(0);
-        if (upto < valid_until) {
-            let delta = valid_until - upto;
-            payment = payment.add(new BN(storageStat.cells).mul(masterchain ? storagePrices[i].mc_cell_price_ps : storagePrices[i].cell_price_ps));
-            payment = payment.add(new BN(storageStat.bits).mul(masterchain ? storagePrices[i].mc_bit_price_ps : storagePrices[i].bit_price_ps));
-            payment = payment.mul(new BN(delta));
-        }
-        upto = valid_until;
-        total = total.add(payment);
-    }
-
-    return shr16ceil(total);
-}
-*/
-
 //
 // Source: https://github.com/ton-foundation/ton/blob/ae5c0720143e231c32c3d2034cfe4e533a16d969/crypto/block/transaction.cpp#L1218
 //
@@ -95,17 +56,6 @@ export function computeFwdFees(msgPrices: MsgPrices, cells: bigint, bits: bigint
 //
 // Source: https://github.com/ton-foundation/ton/blob/ae5c0720143e231c32c3d2034cfe4e533a16d969/crypto/block/transaction.cpp#L761
 //
-
-/*
-export function computeGasPrices(gasUsed: BN, prices: { flatLimit: BN, flatPrice: BN, price: BN }) {
-    if (gasUsed.lte(prices.flatLimit)) {
-        return prices.flatPrice;
-    } else {
-        //  td::rshift(gas_price256 * (gas_used - cfg.flat_gas_limit), 16, 1) + cfg.flat_gas_price
-        return prices.flatPrice.add(prices.price.mul(gasUsed.sub(prices.flatLimit)).shrn(16));
-    }
-}
-*/
 
 //
 // Source: https://github.com/ton-foundation/ton/blob/ae5c0720143e231c32c3d2034cfe4e533a16d969/crypto/block/transaction.cpp#L530
