@@ -57,17 +57,6 @@ export function computeFwdFees(msgPrices: MsgPrices, cells: bigint, bits: bigint
 // Source: https://github.com/ton-foundation/ton/blob/ae5c0720143e231c32c3d2034cfe4e533a16d969/crypto/block/transaction.cpp#L761
 //
 
-/*
-export function computeGasPrices(gasUsed: BN, prices: { flatLimit: BN, flatPrice: BN, price: BN }) {
-    if (gasUsed.lte(prices.flatLimit)) {
-        return prices.flatPrice;
-    } else {
-        //  td::rshift(gas_price256 * (gas_used - cfg.flat_gas_limit), 16, 1) + cfg.flat_gas_price
-        return prices.flatPrice.add(prices.price.mul(gasUsed.sub(prices.flatLimit)).shrn(16));
-    }
-}
-*/
-
 //
 // Source: https://github.com/ton-foundation/ton/blob/ae5c0720143e231c32c3d2034cfe4e533a16d969/crypto/block/transaction.cpp#L530
 //
